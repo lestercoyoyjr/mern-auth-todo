@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
+import dotenv from 'dotenv';
 import mongoose from "mongoose";
 import User from "./models/User.js";
 import bcrypt from 'bcrypt';
@@ -10,7 +11,9 @@ import Todo from "./models/Todo.js";
 
 const secret = 'secret123';
 
-await mongoose.connect('mongodb://localhost:27017/auth-todo', {useNewUrlParser:true, useUnifiedTopology:true});
+dotenv.config();
+// DB Connection
+await mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology:true});
 const db = mongoose.connection;
 db.on('error', console.log);
 
